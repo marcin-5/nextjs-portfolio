@@ -3,6 +3,7 @@ import {Oswald, Signika} from "next/font/google";
 import "./globals.css";
 import {mergeClassNames as mcn} from "@/lib/utils";
 import localFont from "next/font/local";
+import GrainEffect from "@/components/visualEffects/grain-effect";
 
 const LANGUAGE = "en";
 
@@ -25,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang={LANGUAGE}>
     <body className={mcn(mainFont.className, oswaldFont.variable, pixelFont.variable)}>
+    <GrainEffect/>
     {children}
     </body>
     </html>
