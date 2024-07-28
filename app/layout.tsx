@@ -4,14 +4,12 @@ import "./globals.css";
 import {mergeClassNames as mcn} from "@/lib/utils";
 import localFont from "next/font/local";
 
-const FONT_SUBSET = "latin";
 const LANGUAGE = "en";
-const PIXEL_FONT_PATH = "../public/assets/fonts/pixel_font-7.ttf";
 
-const mainFont = Signika({subsets: [FONT_SUBSET]});
-const oswaldFont = Oswald({subsets: [FONT_SUBSET], variable: "--font-oswald"});
+const mainFont = Signika({subsets: ["latin"]});
+const oswaldFont = Oswald({subsets: ["latin"], variable: "--font-oswald"});
 const pixelFont = localFont({
-  src: PIXEL_FONT_PATH,
+  src: "../public/assets/fonts/pixel_font-7.ttf",
   variable: "--font-pixel",
 });
 export const metadata: Metadata = {
@@ -26,7 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={LANGUAGE}>
-    <body className={mcn(mainFont.className, oswaldFont.variable, pixelFont.variable)}>{children}</body>
+    <body className={mcn(mainFont.className, oswaldFont.variable, pixelFont.variable)}>
+    {children}
+    </body>
     </html>
   );
 }
