@@ -4,6 +4,7 @@ import "./globals.css";
 import {mergeClassNames as mcn} from "@/lib/utils";
 import localFont from "next/font/local";
 import GrainEffect from "@/components/visualEffects/grain-effect";
+import {Cursor} from "@/components/cursor/cursor";
 
 const LANGUAGE = "en";
 
@@ -30,6 +31,7 @@ export default function RootLayout({
     <html lang={LANGUAGE}>
     <body className={mcn(mainFont.className, oswaldFont.variable, pixelFont.variable)}>
     <GrainEffect/>
+    <Cursor color={"#fff"}/>
     {children}
     </body>
     </html>
