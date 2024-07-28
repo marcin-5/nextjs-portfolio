@@ -7,12 +7,15 @@ import GrainEffect from "@/components/visualEffects/grain-effect";
 
 const LANGUAGE = "en";
 
+// Fonts
 const mainFont = Signika({subsets: ["latin"]});
 const oswaldFont = Oswald({subsets: ["latin"], variable: "--font-oswald"});
 const pixelFont = localFont({
   src: "../public/assets/fonts/pixel_font-7.ttf",
   variable: "--font-pixel",
 });
+
+// Metadata
 export const metadata: Metadata = {
   title: "Marcin Bojara",
   description: "official portfolio",
