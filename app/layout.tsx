@@ -4,7 +4,7 @@ import "./globals.css";
 import {mergeClassNames as mcn} from "@/lib/utils";
 import localFont from "next/font/local";
 import GrainEffect from "@/components/visualEffects/grain-effect";
-import {Cursor} from "@/components/cursor/cursor";
+import Cursor from "@/components/cursor/cursor";
 
 const LANGUAGE = "en";
 
