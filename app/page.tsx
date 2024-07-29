@@ -1,11 +1,11 @@
-import {mergeClassNames as mcn} from "@/lib/utils";
+"use client";
+
+import WaterWaveWrapper from "@/components/visualEffects/water-wave-wrapper";
 
 export default function Home() {
   return (
-    <div>
-      <h1 className={mcn("text-5xl", "font-bold", "text-red-400")}>Hello</h1>
-      <h1 className={mcn("text-5xl", "font-bold", "font-oswald")}>Hello</h1>
-      <h1 className={mcn("text-4xl", "font-bold", "font-pixel")}>Hello</h1>
-    </div>
+    <WaterWaveWrapper imageUrl={""} dropRadius={3} perturbance={3} resolution={1536}>
+      {() => <div className={"h-screen"}></div>}
+    </WaterWaveWrapper>
   );
 }
