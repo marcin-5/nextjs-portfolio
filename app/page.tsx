@@ -3,6 +3,7 @@
 import Button from "@/components/ui/button";
 import Card from "@/components/ui/card";
 import Input from "@/components/ui/input";
+import TextArea from "@/components/ui/text-area";
 import WaterWaveWrapper from "@/components/visualEffects/water-wave-wrapper";
 import {FaUserLarge} from "react-icons/fa6";
 import {IoHome} from "react-icons/io5";
@@ -22,6 +23,8 @@ export default function Home() {
               </div>
               <Input type={"text"} placeholder={"Full name"}/>
               <Input type={"text"} placeholder={"User name"} icon={<FaUserLarge/>}/>
+              <TextArea placeholder={"description"}/>
+              <TextArea placeholder={"description"} icon={<FaUserLarge/>}/>
             </Card>
           </div>
         </div>
