@@ -1,10 +1,11 @@
 "use client";
 
-import {IoHome} from "react-icons/io5";
 import Button from "@/components/ui/button";
 import Card from "@/components/ui/card";
+import Input from "@/components/ui/input";
 import WaterWaveWrapper from "@/components/visualEffects/water-wave-wrapper";
 import {FaUserLarge} from "react-icons/fa6";
+import {IoHome} from "react-icons/io5";
 
 export default function Home() {
   return (
@@ -19,6 +20,8 @@ export default function Home() {
                 <Button isIcon><FaUserLarge/></Button>
                 <Button link={"http://www.google.com"}>Google</Button>
               </div>
+              <Input type={"text"} placeholder={"Full name"}/>
+              <Input type={"text"} placeholder={"User name"} icon={<FaUserLarge/>}/>
             </Card>
           </div>
         </div>
