@@ -3,6 +3,7 @@
 import Button from "@/components/ui/button";
 import Card from "@/components/ui/card";
 import Input from "@/components/ui/input";
+import Profile from "@/components/ui/profile";
 import TextArea from "@/components/ui/text-area";
 import WaterWaveWrapper from "@/components/visualEffects/water-wave-wrapper";
 import {FaUserLarge} from "react-icons/fa6";
@@ -25,6 +26,7 @@ export default function Home() {
               <Input type={"text"} placeholder={"User name"} icon={<FaUserLarge/>}/>
               <TextArea placeholder={"description"}/>
               <TextArea placeholder={"description"} icon={<FaUserLarge/>}/>
+              <Profile/>
             </Card>
           </div>
         </div>
