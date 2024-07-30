@@ -2,10 +2,12 @@
 
 import Button from "@/components/ui/button";
 import Card from "@/components/ui/card";
+import FancyButton from "@/components/ui/fancy-button";
 import Input from "@/components/ui/input";
 import Profile from "@/components/ui/profile";
 import TextArea from "@/components/ui/text-area";
 import WaterWaveWrapper from "@/components/visualEffects/water-wave-wrapper";
+import {FaArrowRight} from "react-icons/fa";
 import {FaUserLarge} from "react-icons/fa6";
 import {IoHome} from "react-icons/io5";
 
@@ -27,6 +29,9 @@ export default function Home() {
               <TextArea placeholder={"description"}/>
               <TextArea placeholder={"description"} icon={<FaUserLarge/>}/>
               <Profile/>
+              <div className={"w-[350px]"}>
+                <FancyButton text={"Contact me"} icon={<FaArrowRight/>}/>
+              </div>
             </Card>
           </div>
         </div>
