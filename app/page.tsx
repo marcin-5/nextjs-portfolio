@@ -7,6 +7,7 @@ import Input from "@/components/ui/input";
 import LiveClock from "@/components/ui/live-clock";
 import Profile from "@/components/ui/profile";
 import TextArea from "@/components/ui/text-area";
+import MagneticWrapper from "@/components/visualEffects/magnetic-wrapper";
 import WaterWaveWrapper from "@/components/visualEffects/water-wave-wrapper";
 import {FaArrowRight} from "react-icons/fa";
 import {FaUserLarge} from "react-icons/fa6";
@@ -30,9 +31,9 @@ export default function Home() {
               <TextArea placeholder={"description"}/>
               <TextArea placeholder={"description"} icon={<FaUserLarge/>}/>
               <Profile/>
-              <div className={"w-[350px]"}>
+              <MagneticWrapper className={"w-[350px]"}>
                 <FancyButton text={"Contact me"} icon={<FaArrowRight/>}/>
-              </div>
+              </MagneticWrapper>
               <LiveClock timeZone={"Europe/Warsaw"}/>
             </Card>
           </div>
