@@ -6,7 +6,7 @@ const transitionParams = {type: "spring", stiffness: 150, damping: 15, mass: 0.1
 
 interface MagneticWrapperProps {
   children: ReactNode;
-  className: string;
+  className?: string;
 }
 
 interface MiddlePoint {
