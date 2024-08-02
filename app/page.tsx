@@ -6,6 +6,7 @@ import FancyButton from "@/components/ui/fancy-button";
 import Input from "@/components/ui/input";
 import LiveClock from "@/components/ui/live-clock";
 import Profile from "@/components/ui/profile";
+import ScrollDown from "@/components/ui/scroll-down";
 import TextArea from "@/components/ui/text-area";
 import MagneticWrapper from "@/components/visualEffects/magnetic-wrapper";
 import WaterWaveWrapper from "@/components/visualEffects/water-wave-wrapper";
@@ -35,6 +36,9 @@ export default function Home() {
                 <FancyButton text={"Contact me"} icon={<FaArrowRight/>}/>
               </MagneticWrapper>
               <LiveClock timeZone={"Europe/Warsaw"}/>
+              <MagneticWrapper>
+                <ScrollDown/>
+              </MagneticWrapper>
             </Card>
           </div>
         </div>
