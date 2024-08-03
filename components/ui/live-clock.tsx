@@ -28,7 +28,7 @@ const LiveClock: FC<LiveClockProps> = ({timeZone}) => {
       {
         timeDisplay ? (
           <div className={"flex items-center justify-center font-semibold gap-[0.5vw]"}>
-            <span>{getCityNameFromTimeZone(timeZone)},</span>
+            <span>{getCityNameFromTimeZone(timeZone)},&nbsp;</span>
             <span>{timeDisplay}</span>
           </div>
         ) : (
