@@ -60,3 +60,12 @@ body {
     top: -20px;
     z-index: 1;
 }
+
+/* Bottom fade */
+.bottom_fade {
+    background-image: linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0) 20.1275%,
+            rgba(255, 255, 255) 100%
+    );
+}
