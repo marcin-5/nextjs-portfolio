@@ -17,7 +17,7 @@ export default function Header() {
         <ContactButton/>
       </div>
     </div>
-    <div className={"absolute bottom-36 left-10 z-20 md:hidden"}>
+    <div className={"absolute top-[36rem] left-10 z-20 md:hidden"}>
       <ContactButton/>
     </div>
   </>;

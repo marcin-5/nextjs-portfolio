@@ -1,5 +1,7 @@
 import Header from "@/components/navigation/header/header";
 import LiveClock from "@/components/ui/live-clock";
+import ScrollDown from "@/components/ui/scroll-down";
+import MagneticWrapper from "@/components/visualEffects/magnetic-wrapper";
 
 export default function LandingSection() {
   const renderSlogan = () => (<div
@@ -37,5 +39,9 @@ export default function LandingSection() {
 
     {renderSlogan()}
 
+    <MagneticWrapper
+      className="absolute left-[8rem] md:left-1/3 lg:left-1/2 -translate-x-1/2 bottom-[5rem] md:bottom-4 ">
+      <ScrollDown/>
+    </MagneticWrapper>
   </div>;
 }
