@@ -4,95 +4,96 @@ import { useCallback, useEffect, useRef } from "react";
 const useAnimationFrame = (callback: () => void) => {
   const animationRequestId = useRef<number | null>(null);
 
-  const stop = useCallback(() => {
+  const stopAnimation = useCallback(() => {
     if (animationRequestId.current !== null) {
       cancelAnimationFrame(animationRequestId.current);
     }
   }, []);
 
-  const start = useCallback(() => {
-    stop();
+  const startAnimation = useCallback(() => {
+    stopAnimation();
     animationRequestId.current = requestAnimationFrame(() => {
       callback();
-      start();
+      startAnimation();
     });
-  }, [callback, stop]);
+  }, [callback, stopAnimation]);
 
   useEffect(() => {
-    return () => stop(); // Cleanup animation frame on unmount
-  }, [stop]);
+    return () => stopAnimation(); // Cleanup animation frame on unmount
+  }, [stopAnimation]);
 
-  return { start, stop };
+  return { startAnimation, stopAnimation };
 };
 
 export default function SvgCurve() {
-  const path = useRef<SVGPathElement | null>(null);
+  const pathRef = useRef<SVGPathElement | null>(null);
   const progressRef = useRef(0);
   const mouseXRatioRef = useRef(0.5);
   const timeRef = useRef(Math.PI / 2);
-  const defaultProgress = 0;
-  const neutral = 0.5;
 
-  const manageMouseMove = (event: React.MouseEvent) => {
+  const DEFAULT_PROGRESS = 0;
+  const NEUTRAL_POINT = 0.5;
+
+  const handleMouseMove = useCallback((event: React.MouseEvent) => {
     const { movementY } = event;
     const box = (event.target as HTMLElement).getBoundingClientRect();
     mouseXRatioRef.current = (event.clientX - box.left) / box.width;
     progressRef.current += movementY;
-  };
+  }, []);
 
-  const applyPathAttributes = (value: number) => {
+  const updatePathAttribute = useCallback((value: number) => {
     const width = window.innerWidth * 0.7;
-    path.current?.setAttributeNS(null, "d", `M 0 50 Q ${width * mouseXRatioRef.current} ${50 + value} ${width} 50`);
-  };
+    pathRef.current?.setAttributeNS(null, "d", `M 0 50 Q ${width * mouseXRatioRef.current} ${50 + value} ${width} 50`);
+  }, []);
 
-  const linearInterpolation = (from: number, to: number, alpha: number) => from * (1 - alpha) + to * alpha;
+  const linearInterpolate = useCallback(
+    (from: number, to: number, alpha: number) => from * (1 - alpha) + to * alpha,
+    [],
+  );
 
-  const { start: startAnimateIn, stop: stopAnimateIn } = useAnimationFrame(() => {
-    applyPathAttributes(progressRef.current);
+  const { startAnimation: startAnimateIn, stopAnimation: stopAnimateIn } = useAnimationFrame(() => {
+    updatePathAttribute(progressRef.current);
   });
 
-  const resetAnimationTimeAndProgress = useCallback(() => {
+  const resetAnimationState = useCallback(() => {
     timeRef.current = Math.PI / 2;
-    progressRef.current = defaultProgress;
-  }, [defaultProgress]);
+    progressRef.current = DEFAULT_PROGRESS;
+  }, [DEFAULT_PROGRESS]);
 
-  const { start: startAnimateOut, stop: stopAnimateOut } = useAnimationFrame(() => {
+  const { startAnimation: startAnimateOut, stopAnimation: stopAnimateOut } = useAnimationFrame(() => {
     const newProgress = progressRef.current * Math.sin(timeRef.current);
-    applyPathAttributes(newProgress);
-    progressRef.current = linearInterpolation(progressRef.current, 0, 0.04);
+    updatePathAttribute(newProgress);
+    progressRef.current = linearInterpolate(progressRef.current, 0, 0.04);
     timeRef.current += 0.2;
-
-    if (Math.abs(progressRef.current) <= neutral) {
-      resetAnimationTimeAndProgress();
+    if (Math.abs(progressRef.current) <= NEUTRAL_POINT) {
+      resetAnimationState();
       stopAnimateOut();
     }
   });
 
   useEffect(() => {
     startAnimateOut();
-
     const handleResize = () => {
-      applyPathAttributes(progressRef.current);
+      updatePathAttribute(progressRef.current);
     };
-
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
       stopAnimateIn();
       stopAnimateOut();
     };
-  }, [startAnimateOut, stopAnimateIn, stopAnimateOut]);
+  }, [startAnimateOut, stopAnimateIn, stopAnimateOut, updatePathAttribute]);
 
   return (
     <div className="line">
       <span
         onMouseEnter={startAnimateIn}
         onMouseLeave={startAnimateOut}
-        onMouseMove={manageMouseMove}
+        onMouseMove={handleMouseMove}
         className="box"
       ></span>
       <svg>
-        <path ref={path}></path>
+        <path ref={pathRef}></path>
       </svg>
     </div>
   );
