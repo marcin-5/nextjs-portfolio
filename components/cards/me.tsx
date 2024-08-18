@@ -16,7 +16,7 @@ export default function MeCard() {
         {/* Tags */}
         <div className="absolute top-[75%] space-y-2">
           <TagComponent text="Hello, universe 👋"/>
-          <TagComponent text="I'm Marcin Bojara"/>
+          <TagComponent text="I'm Marcin Bojara" className={"rounded-tl-none"}/>
           <TagComponent text="Full stack developer"/>
         </div>
       </div>
