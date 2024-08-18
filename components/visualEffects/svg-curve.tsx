@@ -1,70 +1,87 @@
 "use client";
-import {useEffect, useRef} from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 const useAnimationFrame = (callback: () => void) => {
-  let animationRequestId: number | null = null;
-  return () => {
+  const animationRequestId = useRef<number | null>(null);
+
+  const stop = useCallback(() => {
+    if (animationRequestId.current !== null) {
+      cancelAnimationFrame(animationRequestId.current);
+    }
+  }, []);
+
+  const start = useCallback(() => {
     stop();
-    animationRequestId = requestAnimationFrame(callback);
-  };
+    animationRequestId.current = requestAnimationFrame(() => {
+      callback();
+      start();
+    });
+  }, [callback, stop]);
+
+  useEffect(() => {
+    return () => stop(); // Cleanup animation frame on unmount
+  }, [stop]);
+
+  return { start, stop };
 };
 
 export default function SvgCurve() {
   const path = useRef<SVGPathElement | null>(null);
-  let progress = 0;
-  let mouseXRatio = 0.5;
-  let time = Math.PI / 2;
+  const progressRef = useRef(0);
+  const mouseXRatioRef = useRef(0.5);
+  const timeRef = useRef(Math.PI / 2);
   const defaultProgress = 0;
   const neutral = 0.5;
 
   const manageMouseMove = (event: React.MouseEvent) => {
-    const {movementY} = event;
+    const { movementY } = event;
     const box = (event.target as HTMLElement).getBoundingClientRect();
-    mouseXRatio = (event.clientX - box.left) / box.width;
-    progress += movementY;
+    mouseXRatioRef.current = (event.clientX - box.left) / box.width;
+    progressRef.current += movementY;
   };
 
   const applyPathAttributes = (value: number) => {
     const width = window.innerWidth * 0.7;
-    path.current?.setAttributeNS(null, "d", `M 0 50 Q ${width * mouseXRatio} ${50 + value} ${width} 50`);
+    path.current?.setAttributeNS(null, "d", `M 0 50 Q ${width * mouseXRatioRef.current} ${50 + value} ${width} 50`);
   };
 
-  const linearInterpolation = (from: number, to: number, alpha: number) =>
-    from * (1 - alpha) + to * alpha;
+  const linearInterpolation = (from: number, to: number, alpha: number) => from * (1 - alpha) + to * alpha;
 
-  const startAnimateIn = useAnimationFrame(() => {
-    applyPathAttributes(progress);
-    startAnimateIn();
+  const { start: startAnimateIn, stop: stopAnimateIn } = useAnimationFrame(() => {
+    applyPathAttributes(progressRef.current);
   });
 
-  const resetAnimationTimeAndProgress = () => {
-    time = Math.PI / 2;
-    progress = defaultProgress;
-  };
+  const resetAnimationTimeAndProgress = useCallback(() => {
+    timeRef.current = Math.PI / 2;
+    progressRef.current = defaultProgress;
+  }, [defaultProgress]);
 
-  const continueAnimationOrReset = () => {
-    Math.abs(progress) > neutral ? startAnimateOut() : resetAnimationTimeAndProgress();
-  };
-
-  const startAnimateOut = useAnimationFrame(() => {
-    const newProgress = progress * Math.sin(time);
+  const { start: startAnimateOut, stop: stopAnimateOut } = useAnimationFrame(() => {
+    const newProgress = progressRef.current * Math.sin(timeRef.current);
     applyPathAttributes(newProgress);
-    progress = linearInterpolation(progress, 0, 0.04);
-    time += 0.2;
-    continueAnimationOrReset();
-  });
+    progressRef.current = linearInterpolation(progressRef.current, 0, 0.04);
+    timeRef.current += 0.2;
 
-  startAnimateOut(); // initializing the component with final animation state
+    if (Math.abs(progressRef.current) <= neutral) {
+      resetAnimationTimeAndProgress();
+      stopAnimateOut();
+    }
+  });
 
   useEffect(() => {
+    startAnimateOut();
+
     const handleResize = () => {
-      applyPathAttributes(progress);
+      applyPathAttributes(progressRef.current);
     };
-    window.addEventListener('resize', handleResize);
+
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
+      stopAnimateIn();
+      stopAnimateOut();
     };
-  }, [progress]);
+  }, [startAnimateOut, stopAnimateIn, stopAnimateOut]);
 
   return (
     <div className="line">
