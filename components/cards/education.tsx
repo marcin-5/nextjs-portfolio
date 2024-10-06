@@ -10,8 +10,6 @@ const EDUCATION_DATA = [
   },
 ];
 
-const EducationTimelineItems: React.FC<{ items: typeof EDUCATION_DATA }> = ({ items }) => <></>;
-
 export default function EducationCard() {
   return (
     <Card title="My Education">
