@@ -12,22 +12,14 @@ const EXPERIENCES_DATA = [
   },
 ];
 
-const renderTimelineItems = () =>
-  EXPERIENCES_DATA.map((experience, index) => (
-    <TimelineItem
-      key={index}
-      date={experience.date}
-      title={experience.title}
-      subTitle={experience.subTitle}
-      link={experience.link}
-      tag={experience.tag}
-    />
-  ));
-
 export default function ExperienceCard() {
   return (
     <Card title="My Experience">
-      <Timeline>{renderTimelineItems()}</Timeline>
+      <Timeline>
+        {EXPERIENCES_DATA.map((experience, index) => (
+          <TimelineItem key={index} {...experience} />
+        ))}
+      </Timeline>
     </Card>
   );
 }
