@@ -1,6 +1,6 @@
 "use client";
 
-import WaterEffect from "@/components/visualEffects/watter-effect";
+import WaterEffect from "@/components/visualEffects/water-effect";
 import { FC, ReactNode, useEffect, useState } from "react";
 
 interface WaterWaveProps {
