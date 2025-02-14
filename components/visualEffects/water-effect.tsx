@@ -3,6 +3,17 @@ import type { ReactNode, RefObject } from "react";
 import { useEffect, useRef } from "react";
 import "jquery.ripples";
 
+// Constants
+const DEFAULT_VALUES = {
+  DROP_RADIUS: 20,
+  PERTURBANCE: 0.03,
+  RESOLUTION: 256,
+  INTERACTIVE: true,
+  CROSS_ORIGIN: "",
+  IMAGE_URL: "",
+} as const;
+
+// Types and Interfaces
 export interface RipplesOptions {
   imageUrl: string;
   dropRadius?: number;
@@ -12,36 +23,35 @@ export interface RipplesOptions {
   crossOrigin?: string;
 }
 
-export type SetProperties = "dropRadius" | "perturbance" | "interactive" | "imageUrl" | "crossOrigin";
-
-export type Drop = ({ x, y, radius, strength }: { x: number; y: number; radius: number; strength: number }) => void;
-
-export type Set = ({ property, value }: { property: SetProperties; value: any }) => void;
-
-// @ts-ignore
-export interface WaterEffectProps extends RipplesOptions, React.ComponentPropsWithoutRef<"div"> {
-  children: (props: {
-    destroy: () => void;
-    pause: () => void;
-    play: () => void;
-    hide: () => void;
-    show: () => void;
-    drop: Drop;
-    set: Set;
-    updateSize: () => void;
-  }) => ReactNode;
+interface RipplesActions {
+  destroy: () => void;
+  pause: () => void;
+  play: () => void;
+  hide: () => void;
+  show: () => void;
+  drop: Drop;
+  set: Set;
+  updateSize: () => void;
 }
 
-export type RipplesArgument =
-  | "destroy"
-  | "drop"
-  | "pause"
-  | "play"
-  | "hide"
-  | "show"
-  | "set"
-  | "updateSize"
-  | RipplesOptions;
+export type SetProperties = "dropRadius" | "perturbance" | "interactive" | "imageUrl" | "crossOrigin";
+export type Drop = ({ x, y, radius, strength }: { x: number; y: number; radius: number; strength: number }) => void;
+export type Set = ({ property, value }: { property: SetProperties; value: unknown }) => void;
+export type RipplesCommand = "destroy" | "drop" | "pause" | "play" | "hide" | "show" | "set" | "updateSize";
+
+declare global {
+  interface JQuery {
+    ripples(options: RipplesOptions): this;
+
+    ripples(command: RipplesCommand, ...args: any[]): this;
+  }
+}
+
+type WaterEffectBaseProps = Omit<React.ComponentPropsWithoutRef<"div">, "children">;
+
+export interface WaterEffectProps extends RipplesOptions, WaterEffectBaseProps {
+  children: (props: RipplesActions) => ReactNode;
+}
 
 export const useRipples = ({
   imageUrl,
@@ -53,15 +63,12 @@ export const useRipples = ({
   rippleRef,
 }: RipplesOptions & {
   rippleRef: RefObject<HTMLDivElement>;
-}) => {
-  const target = useRef({
-    ripples: (_arg: RipplesArgument, ..._args: any[]) => {},
-  });
+}): RipplesActions => {
+  const jqueryElementRef = useRef<JQuery>(null!);
 
   useEffect(() => {
-    target.current = $(rippleRef.current as any) as any;
-
-    target.current.ripples({
+    jqueryElementRef.current = $(rippleRef.current!);
+    jqueryElementRef.current.ripples({
       imageUrl,
       dropRadius,
       perturbance,
@@ -71,66 +78,38 @@ export const useRipples = ({
     });
 
     return () => {
-      target.current.ripples("destroy");
+      jqueryElementRef.current.ripples("destroy");
     };
   }, [crossOrigin, dropRadius, imageUrl, interactive, perturbance, resolution, rippleRef]);
 
-  const destroy = () => {
-    target.current.ripples("destroy");
-  };
-
-  const drop: Drop = ({ x, y, radius, strength }) => {
-    target.current.ripples("drop", x, y, radius, strength);
-  };
-
-  const pause = () => {
-    target.current.ripples("pause");
-  };
-
-  const play = () => {
-    target.current.ripples("play");
-  };
-
-  const hide = () => {
-    target.current.ripples("hide");
-  };
-
-  const show = () => {
-    target.current.ripples("show");
-  };
-
-  const set: Set = ({ property, value }) => {
-    target.current.ripples("set", property, value);
-  };
-
-  const updateSize = () => {
-    target.current.ripples("updateSize");
+  const executeCommand = (command: RipplesCommand, ...args: any[]) => {
+    jqueryElementRef.current.ripples(command, ...args);
   };
 
   return {
-    destroy,
-    pause,
-    play,
-    hide,
-    show,
-    drop,
-    set,
-    updateSize,
+    destroy: () => executeCommand("destroy"),
+    drop: ({ x, y, radius, strength }) => executeCommand("drop", x, y, radius, strength),
+    pause: () => executeCommand("pause"),
+    play: () => executeCommand("play"),
+    hide: () => executeCommand("hide"),
+    show: () => executeCommand("show"),
+    set: ({ property, value }) => executeCommand("set", property, value),
+    updateSize: () => executeCommand("updateSize"),
   };
 };
 
 function WaterEffect({
-  imageUrl = "",
-  dropRadius = 20,
-  perturbance = 0.03,
-  resolution = 256,
-  interactive = true,
-  crossOrigin = "",
+  imageUrl = DEFAULT_VALUES.IMAGE_URL,
+  dropRadius = DEFAULT_VALUES.DROP_RADIUS,
+  perturbance = DEFAULT_VALUES.PERTURBANCE,
+  resolution = DEFAULT_VALUES.RESOLUTION,
+  interactive = DEFAULT_VALUES.INTERACTIVE,
+  crossOrigin = DEFAULT_VALUES.CROSS_ORIGIN,
   children,
   ...otherProps
 }: WaterEffectProps) {
   const rippleRef = useRef<HTMLDivElement>(null);
-  const { destroy, pause, play, hide, show, drop, set, updateSize } = useRipples({
+  const rippleActions = useRipples({
     imageUrl,
     dropRadius,
     perturbance,
@@ -142,16 +121,7 @@ function WaterEffect({
 
   return (
     <div ref={rippleRef} {...otherProps}>
-      {children({
-        destroy,
-        pause,
-        play,
-        hide,
-        show,
-        drop,
-        set,
-        updateSize,
-      })}
+      {children(rippleActions)}
     </div>
   );
 }
