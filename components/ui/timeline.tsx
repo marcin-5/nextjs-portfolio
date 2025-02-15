@@ -20,7 +20,7 @@ interface TimelineItemProps {
 
 export const TimelineItem: FC<TimelineItemProps> = ({ date, subTitle, title, link, tag }) => {
   return (
-    <div className="flex flex-wrap gap-12 min-h justify-start relative">
+    <div className="flex flex-wrap gap-x-4 min-h justify-start relative">
       <DateTimeline date={date} />
       <RightSide date={date} title={title} link={link} subTitle={subTitle} tag={tag} />
     </div>
@@ -51,7 +51,7 @@ const RightSide: FC<{ date?: string; title: string; link?: string; subTitle: str
   return (
     <div className="flex gap-x-2" style={{ transform: date ? "none" : "translateX(-45px)" }}>
       <div className="flex flex-col gap-0.5">
-        <div className="text-primary-foreground break-words whitespace-pre">
+        <div className="text-primary-foreground break-words">
           <p className="leading-6 font-medium text-sm">{title}</p>
         </div>
         <div className="flex items-center gap-2 w-auto">{linkContent}</div>
