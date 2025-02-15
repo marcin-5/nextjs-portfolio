@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "devicon": "^2.16.0",
     "framer-motion": "^11.18.2",
     "jquery": "^3.7.1",
     "moment-timezone": "^0.5.47",
