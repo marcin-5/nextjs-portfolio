@@ -71,8 +71,8 @@ const TimelineItemBody: FC<TimelineItemBodyProps> = ({ link, subTitle, tags }) =
     <p className="text-sm font-normal leading-6 mt-1">{subTitle}</p>
     {link && <FiArrowUpRight />}
     {tags &&
-      tags.map((tag) => (
-        <div className="ms-2 rounded-[20px] bg-white/5 py-0.5 px-1.5 justify-end">
+      tags.map((tag, index) => (
+        <div key={index} className="ms-2 rounded-[20px] bg-white/5 py-0.5 px-1.5 justify-end">
           <p className="text-[0.8rem] font-light text-secondary-foreground">{tag}</p>
         </div>
       ))}
