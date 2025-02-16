@@ -1,4 +1,4 @@
-import type {Config} from "tailwindcss";
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
@@ -13,7 +13,7 @@ const config: Config = {
         oswald: ["var(--font-oswald)"],
         pixel: ["var(--font-pixel)"],
       },
-      screens: {xs: "520px", "2xl": "1400px"},
+      screens: { xs: "520px", "2xl": "1400px" },
       colors: {
         primary: {
           background: "rgba(255, 255, 255, .05)",
@@ -21,7 +21,7 @@ const config: Config = {
         },
         secondary: {
           background: "rgba(255, 255, 255, .03)",
-          foreground: "rgba(255,255,255,0.4)",
+          foreground: "rgba(255,255,255,0.5)",
         },
         blue: {
           joust: "#56acff",
