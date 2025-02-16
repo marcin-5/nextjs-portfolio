@@ -7,6 +7,7 @@ const EDUCATION_DATA = [
     date: "2002 — 2007",
     title: "IT engineer - Information systems",
     subTitle: "University of Technology Kielce",
+    tags: ["Java", "PHP", "PL/SQL", "PSP"],
   },
 ];
 

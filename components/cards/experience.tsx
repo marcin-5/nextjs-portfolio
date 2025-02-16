@@ -8,7 +8,7 @@ const EXPERIENCES_DATA = [
     title: "Python/Linux developer",
     subTitle: "Pisi Linux",
     link: "https://pisilinux.org/",
-    tag: "Remote",
+    tags: ["Remote"],
   },
 ];
 

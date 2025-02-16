@@ -15,14 +15,14 @@ interface TimelineItemProps {
   title: string;
   subTitle: string;
   link?: string;
-  tag?: string;
+  tags?: string[];
 }
 
-export const TimelineItem: FC<TimelineItemProps> = ({ date, subTitle, title, link, tag }) => {
+export const TimelineItem: FC<TimelineItemProps> = ({ date, subTitle, title, link, tags }) => {
   return (
     <div className="flex flex-wrap gap-x-4 min-h justify-start relative">
       <DateTimeline date={date} />
-      <RightSide date={date} title={title} link={link} subTitle={subTitle} tag={tag} />
+      <RightSide date={date} title={title} link={link} subTitle={subTitle} tags={tags} />
     </div>
   );
 };
@@ -33,19 +33,19 @@ const DateTimeline: FC<{ date?: string }> = ({ date }) => (
   </div>
 );
 
-const RightSide: FC<{ date?: string; title: string; link?: string; subTitle: string; tag?: string }> = ({
+const RightSide: FC<{ date?: string; title: string; link?: string; subTitle: string; tags?: string[] }> = ({
   date,
   title,
   link,
   subTitle,
-  tag,
+  tags,
 }) => {
   const linkContent = link ? (
     <Link href={link} target="_blank">
-      <TimelineItemBody subTitle={subTitle} link={link} tag={tag} />
+      <TimelineItemBody subTitle={subTitle} link={link} tags={tags} />
     </Link>
   ) : (
-    <TimelineItemBody subTitle={subTitle} tag={tag} />
+    <TimelineItemBody subTitle={subTitle} tags={tags} />
   );
 
   return (
@@ -62,18 +62,19 @@ const RightSide: FC<{ date?: string; title: string; link?: string; subTitle: str
 
 interface TimelineItemBodyProps {
   subTitle: string;
-  tag?: string;
+  tags?: string[];
   link?: string;
 }
 
-const TimelineItemBody: FC<TimelineItemBodyProps> = ({ link, subTitle, tag }) => (
+const TimelineItemBody: FC<TimelineItemBodyProps> = ({ link, subTitle, tags }) => (
   <div className="text-secondary-foreground flex items-center">
     <p className="text-sm font-normal leading-6 mt-1">{subTitle}</p>
     {link && <FiArrowUpRight />}
-    {tag && (
-      <div className="ms-2 rounded-[20px] bg-white/5 py-0.5 px-1.5 justify-end">
-        <p className="text-[0.8rem] font-normal text-secondary-foreground">{tag}</p>
-      </div>
-    )}
+    {tags &&
+      tags.map((tag) => (
+        <div className="ms-2 rounded-[20px] bg-white/5 py-0.5 px-1.5 justify-end">
+          <p className="text-[0.8rem] font-light text-secondary-foreground">{tag}</p>
+        </div>
+      ))}
   </div>
 );
