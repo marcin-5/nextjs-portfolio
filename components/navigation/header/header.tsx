@@ -1,24 +1,26 @@
 import FancyButton from "@/components/ui/fancy-button";
 import Profile from "@/components/ui/profile";
 import MagneticWrapper from "@/components/visualEffects/magnetic-wrapper";
-import {FaArrowRight} from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 
 const ContactButton = () => (
   <MagneticWrapper>
-    <FancyButton text={"Let's talk"} icon={<FaArrowRight/>}/>
+    <FancyButton text={"Let's talk"} icon={<FaArrowRight />} />
   </MagneticWrapper>
 );
 
 export default function Header() {
-  return <>
-    <div className={"w-full flex items-center justify-center md:justify-between"}>
-      <Profile/>
-      <div className={"hidden md:inline"}>
-        <ContactButton/>
+  return (
+    <>
+      <div className={"w-full flex items-center justify-center md:justify-between"}>
+        <Profile />
+        <div className={"hidden md:inline"}>
+          <ContactButton />
+        </div>
       </div>
-    </div>
-    <div className={"absolute top-[36rem] left-10 z-20 md:hidden"}>
-      <ContactButton/>
-    </div>
-  </>;
+      <div className={"absolute top-[37rem] left-10 z-20 md:hidden"}>
+        <ContactButton />
+      </div>
+    </>
+  );
 }
