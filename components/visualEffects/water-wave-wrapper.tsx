@@ -1,7 +1,10 @@
 "use client";
 
-import WaterEffect from "@/components/visualEffects/water-effect";
+import dynamic from "next/dynamic";
 import { FC, ReactNode, useEffect, useState } from "react";
+
+// Dynamically import WaterEffect with SSR disabled
+const WaterEffect = dynamic(() => import("@/components/visualEffects/water-effect"), { ssr: false });
 
 interface WaterWaveProps {
   imageUrl: string;
