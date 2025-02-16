@@ -20,7 +20,7 @@ const Tooltip: FC<TooltipProps> = ({ title, image, bgColor = null }) => {
         className="absolute -top-6 bg-black/[0.2] py-0.5 px-1.5 rounded-2xl backdrop-blur-[6px] transition-all duration-200"
         role="tooltip"
       >
-        <p className="font-pixel text-[10px] whitespace-nowrap">{title}</p>
+        <p className="font-light text-[0.5rem] whitespace-nowrap">{title}</p>
       </div>
     );
   };
@@ -29,7 +29,7 @@ const Tooltip: FC<TooltipProps> = ({ title, image, bgColor = null }) => {
     <div
       className={mergeClassNames(
         "link relative w-12 h-12 transform cursor-pointer grid place-items-center",
-        "border border-border rounded-xl hover:scale-110 transition-all duration-200",
+        "border border-border rounded-xl hover:scale-125 transition-all duration-200",
       )}
       style={{ background: bgColor || "#2D2C2B" }}
       onMouseEnter={() => setIsTooltipVisible(true)}

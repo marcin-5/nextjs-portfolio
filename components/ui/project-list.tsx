@@ -37,7 +37,7 @@ const RightSide: FC<{ link: string; desc: string; stack: string[] }> = ({ link, 
   return (
     <div className="w-auto">
       <p className="text-primary-foreground break-words">{desc}</p>
-      <p className="text-[10px] font-normal text-neutral-400">{stack.join(", ")}</p>
+      <p className="text-[0.9rem] font-light text-neutral-400">{stack.join(", ")}</p>
     </div>
   );
 };

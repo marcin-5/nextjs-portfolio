@@ -72,7 +72,7 @@ const TimelineItemBody: FC<TimelineItemBodyProps> = ({ link, subTitle, tag }) =>
     {link && <FiArrowUpRight />}
     {tag && (
       <div className="ms-2 rounded-[20px] bg-white/5 py-0.5 px-1.5 justify-end">
-        <p className="text-[10px] font-normal text-secondary-foreground">{tag}</p>
+        <p className="text-[0.8rem] font-normal text-secondary-foreground">{tag}</p>
       </div>
     )}
   </div>
