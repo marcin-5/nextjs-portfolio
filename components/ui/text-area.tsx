@@ -4,15 +4,17 @@ interface TextAreaProps {
   name: string;
   placeholder: string;
   icon?: ReactNode;
+  rows?: number;
 }
 
-const TextArea: FC<TextAreaProps> = ({ name, placeholder, icon }) => {
+const TextArea: FC<TextAreaProps> = ({ name, placeholder, icon, rows }) => {
   return (
     <div className={"relative w-full"}>
       {/* Icon */}
       <div className={"absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"}>{icon}</div>
       <textarea
         name={name}
+        rows={rows}
         placeholder={placeholder}
         className={
           "bg-primary-background text-primary-foreground w-full" + " rounded-lg text-sm ps-10 p-2.5 pt-9 focus:outline"
