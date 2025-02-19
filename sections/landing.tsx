@@ -30,7 +30,7 @@ export default function LandingSection() {
   );
 
   return (
-    <div className={"relative h-screen overflow-visible p-8"}>
+    <section id="" className={"relative h-screen overflow-visible p-8"}>
       <Header />
 
       <div className={"absolute right-10 bottom-10"}>
@@ -42,6 +42,6 @@ export default function LandingSection() {
       <MagneticWrapper className="absolute left-[8rem] md:left-1/3 lg:left-1/2 -translate-x-1/2 bottom-[5rem] md:bottom-10 ">
         <ScrollDown />
       </MagneticWrapper>
-    </div>
+    </section>
   );
 }
