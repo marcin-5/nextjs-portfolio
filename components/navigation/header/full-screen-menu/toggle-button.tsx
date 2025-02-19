@@ -3,7 +3,7 @@ import React from "react";
 
 interface Props {
   open: boolean;
-  toggleOpen: (updater: (prev: boolean) => boolean) => void;
+  toggleOpen: (value: boolean) => void;
 }
 
 export default function ToggleButton({ open, toggleOpen }: Props) {
@@ -27,7 +27,7 @@ export default function ToggleButton({ open, toggleOpen }: Props) {
 
   return (
     <button
-      onClick={() => toggleOpen((prev) => !prev)}
+      onClick={() => toggleOpen(!open)}
       className="fixed right-4 top-4 m-5 z-50 w-20 h-20 rounded-full bg-slate-800 cursor-pointer"
     >
       <div className="relative flex items-center justify-center">
