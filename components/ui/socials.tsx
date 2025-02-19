@@ -11,22 +11,22 @@ interface Social {
 const socials: Social[] = [
   {
     icon: <FaGithub className={"w-5 h-5"} />,
-    link: "https://github.com/marcin-5",
+    link: process.env.NEXT_PUBLIC_GITHUB_URL as string,
     username: "marcin-5",
   },
   {
     icon: <FaLinkedinIn className={"w-5 h-5"} />,
-    link: "https://www.linkedin.com/in/marcin-bojara-142857e/",
+    link: process.env.NEXT_PUBLIC_LINKEDIN_URL as string,
     username: "Marcin Bojara",
   },
   {
     icon: <SiCodewars className={"w-5 h-5"} />,
-    link: "https://www.codewars.com/users/marcin-5",
+    link: process.env.NEXT_PUBLIC_CODEWARS_URL as string,
     username: "marcin-5",
   },
   {
     icon: <SiUdemy className={"w-5 h-5"} />,
-    link: "https://www.udemy.com/user/marcin-bojara/",
+    link: process.env.NEXT_PUBLIC_UDEMY_URL as string,
     username: "Marcin Bojara",
   },
 ];
