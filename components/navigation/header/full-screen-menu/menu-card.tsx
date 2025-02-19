@@ -9,10 +9,10 @@ interface NavigationLink {
   href: string;
 }
 
-const NavigationList = ({ links, onClose }: { links: NavigationLink[]; onClose?: () => void }) => (
+const NavigationList = ({ links }: { links: NavigationLink[]; onClose?: () => void }) => (
   <div className={CARD_STYLES.navigation}>
     {links.map((item, index) => (
-      <NavLink key={index} {...item} index={index} dotEffect={false} linkClasses={CARD_STYLES.link} onClick={onClose} />
+      <NavLink key={index} {...item} index={index} dotEffect={false} linkClasses={CARD_STYLES.link} />
     ))}
   </div>
 );
@@ -28,15 +28,11 @@ const BackgroundImage = () => (
   <Image src={Background} alt="Menu background texture" className={CARD_STYLES.background} />
 );
 
-interface MenuCardProps {
-  onClose?: () => void;
-}
-
-export default function MenuCard({ onClose }: MenuCardProps) {
+export default function MenuCard() {
   return (
     <div className={CARD_STYLES.container}>
       <CardHeader />
-      <NavigationList links={MENU_CARD_LINKS} onClose={onClose} />
+      <NavigationList links={MENU_CARD_LINKS} />
       <BackgroundImage />
     </div>
   );

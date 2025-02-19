@@ -1,5 +1,6 @@
 import { scale, slide } from "@/components/navigation/header/full-screen-menu/animation";
 import { DEFAULT_LINK_CLASSES } from "@/components/navigation/header/full-screen-menu/config";
+import { useMenu } from "@/components/navigation/header/full-screen-menu/menu-context";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { FC, useCallback, useState } from "react";
@@ -10,7 +11,6 @@ interface NavLinkProps {
   index: number;
   dotEffect?: boolean;
   linkClasses?: string;
-  onClick?: () => void;
 }
 
 const renderDotEffect = (isHovered: boolean) => (
@@ -22,11 +22,12 @@ const renderDotEffect = (isHovered: boolean) => (
   />
 );
 
-const NavLink: FC<NavLinkProps> = ({ title, href, index, dotEffect, linkClasses, onClick }) => {
+const NavLink: FC<NavLinkProps> = ({ title, href, index, dotEffect, linkClasses }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = useCallback(() => setIsHovered(true), []);
   const handleMouseLeave = useCallback(() => setIsHovered(false), []);
+  const { onClose } = useMenu();
 
   return (
     <motion.div
@@ -45,7 +46,7 @@ const NavLink: FC<NavLinkProps> = ({ title, href, index, dotEffect, linkClasses,
         href={href}
         className={linkClasses || DEFAULT_LINK_CLASSES}
         aria-label={`Navigate to ${title}`}
-        onClick={onClick}
+        onClick={onClose}
       >
         {title}
       </Link>
