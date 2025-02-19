@@ -4,7 +4,7 @@ import Tooltip from "../ui/tooltip";
 
 export default function StackCard() {
   return (
-    <Card title="My Tech stack">
+    <Card title="My Tech stack" sectionId={"stack"}>
       <div className="flex flex-col gap-6 mt-2">
         {stackData.map((tech, index) => (
           <div key={index} className="grid items-center gap-[90px]" style={{ gridTemplateColumns: "50px 1fr" }}>

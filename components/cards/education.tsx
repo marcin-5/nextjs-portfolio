@@ -13,7 +13,7 @@ const EDUCATION_DATA = [
 
 export default function EducationCard() {
   return (
-    <Card title="My Education">
+    <Card title="My Education" sectionId={"education"}>
       <Timeline>
         {EDUCATION_DATA.map((education, index) => (
           <TimelineItem key={index} {...education} />

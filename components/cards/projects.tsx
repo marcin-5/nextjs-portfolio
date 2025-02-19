@@ -5,7 +5,7 @@ import { ProjectList, ProjectListItem } from "../ui/project-list";
 
 export default function ProjectsCard() {
   return (
-    <Card title="My Projects">
+    <Card title="My Projects" sectionId={"projects"}>
       <ProjectList>
         {projectData.map((project, index) => (
           <ProjectListItem key={index} {...project} />

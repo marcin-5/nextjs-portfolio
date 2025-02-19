@@ -1,11 +1,11 @@
 import Card from "@/components/ui/card";
-import {mergeClassNames} from "@/lib/utils";
+import { mergeClassNames } from "@/lib/utils";
 import MyImg from "@/public/assets/images/gallery/me1.jpg";
 import Image from "next/image";
 
 export default function MeCard() {
   return (
-    <Card className="2xl:h-full">
+    <Card className="2xl:h-full" sectionId={"me"}>
       <div className="w-full h-[400px] sm:h-[500px] overflow-hidden">
         {/* background image */}
         <Image
@@ -15,16 +15,16 @@ export default function MeCard() {
         />
         {/* Tags */}
         <div className="absolute top-[75%] space-y-2">
-          <TagComponent text="Hello, universe 👋"/>
-          <TagComponent text="I'm Marcin Bojara" className={"rounded-tl-none"}/>
-          <TagComponent text="Full stack developer"/>
+          <TagComponent text="Hello, universe 👋" />
+          <TagComponent text="I'm Marcin Bojara" className={"rounded-tl-none"} />
+          <TagComponent text="Full stack developer" />
         </div>
       </div>
     </Card>
   );
 }
 
-const TagComponent = ({text, className}: { text: string; className?: string }) => {
+const TagComponent = ({ text, className }: { text: string; className?: string }) => {
   return (
     <div className={mergeClassNames("bg-black/[0.7] w-fit py-1.5 px-3 rounded-2xl", className)}>
       <p className="text-primary-foreground leading-[110%] font-bold">{text}</p>

@@ -14,7 +14,7 @@ const EXPERIENCES_DATA = [
 
 export default function ExperienceCard() {
   return (
-    <Card title="My Experience">
+    <Card title="My Experience" sectionId={"experience"}>
       <Timeline>
         {EXPERIENCES_DATA.map((experience, index) => (
           <TimelineItem key={index} {...experience} />

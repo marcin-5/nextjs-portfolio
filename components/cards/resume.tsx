@@ -40,7 +40,7 @@ export default function ResumeCard() {
   }, []);
 
   return (
-    <Card className="md:h-full">
+    <Card className="md:h-full" sectionId={"resume"}>
       <p className="text-lg xl:text-2xl font-medium text-primary-foreground text-justify">{sentence}</p>
       <div className={"flex items-end justify-end pb-8"}>
         <Image src={SignatureImg} alt="marcin bojara" />

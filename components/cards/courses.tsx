@@ -168,7 +168,7 @@ const COURSES_DATA = [
 
 export default function CoursesCard() {
   return (
-    <Card title="Completed Courses">
+    <Card title="Completed Courses" sectionId={"courses"}>
       <Timeline>
         {COURSES_DATA.map((course, index) => (
           <TimelineItem key={index} {...course} />
