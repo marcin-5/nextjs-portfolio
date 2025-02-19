@@ -24,7 +24,7 @@ const GalleryImage: React.FC<GalleryImageProps> = ({ imgSrc }) => (
 
 export default function Gallery() {
   return (
-    <div className="h-[550px] sm:h-[650px] md:h-full 2xl:h-[750px] w-full">
+    <section id="gallery" className="h-[550px] sm:h-[650px] md:h-full 2xl:h-[750px] w-full">
       <Swiper {...SWIPER_OPTIONS} className="mySwiper rounded-2xl">
         {galleryImages.map((img) => (
           <SwiperSlide key={img.id}>
@@ -32,6 +32,6 @@ export default function Gallery() {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </section>
   );
 }
