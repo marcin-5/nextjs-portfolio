@@ -31,7 +31,7 @@ export const DEFAULT_LINK_CLASSES =
 
 export const CARD_STYLES = {
   container:
-    "w-full h-auto min-h-[427px] gap-[70px] bg-slate-800 rounded-[10px] flex-col justify-between items-start flex relative overflow-hidden pt-10 px-[25px] pb-5 shadow-md",
+    "w-full h-auto min-h-[427px] gap-[70px] bg-zinc-800 rounded-[10px] flex-col justify-between items-start flex relative overflow-hidden pt-10 px-[25px] pb-5 shadow-md",
   header: "w-full flex relative justify-between items-center",
   title: "uppercase font-bold text-2xl text-amber-200",
   navigation: "z-40 w-full flex flex-col gap-y-[10px] justify-center items-start relative",

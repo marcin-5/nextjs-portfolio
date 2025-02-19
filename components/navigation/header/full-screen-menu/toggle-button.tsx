@@ -28,7 +28,7 @@ export default function ToggleButton({ open, toggleOpen }: Props) {
   return (
     <button
       onClick={() => toggleOpen(!open)}
-      className="fixed right-4 top-4 m-5 z-50 w-20 h-20 rounded-full bg-slate-800 cursor-pointer"
+      className="fixed right-4 top-4 m-5 z-50 w-20 h-20 rounded-full bg-zinc-700 cursor-pointer"
     >
       <div className="relative flex items-center justify-center">
         <div className="flex flex-col gap-y-2 w-[30px] transform transition-all duration-300 origin-center overflow-hidden">

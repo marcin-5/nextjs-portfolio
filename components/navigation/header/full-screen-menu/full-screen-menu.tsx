@@ -15,7 +15,7 @@ export default function FullScreenMenu({ onClose }: { onClose: () => void }) {
         initial="initial"
         animate="enter"
         exit="exit"
-        className="h-screen w-full bg-slate-950 fixed top-0 right-0 text-primary-foreground z-40 font-oswald"
+        className="h-screen w-full bg-zinc-950 fixed top-0 right-0 text-primary-foreground z-40 font-oswald"
       >
         <ProfileSection />
         <MainContent />
