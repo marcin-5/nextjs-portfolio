@@ -16,16 +16,12 @@ export const MENU_CARD_LINKS = [
 ];
 
 export const FOOTER_LINKS = {
-  left: [
-    { title: "LEGAL NOTICE", href: "/" },
-    { title: "404", href: "/" },
-    { title: "LEGALSTYLE", href: "/" },
-  ],
+  left: [],
   middle: [
-    { title: "GITHUB", href: process.env.NEXT_PUBLIC_GITHUB_URL },
-    { title: "LINKEDIN", href: process.env.NEXT_PUBLIC_LINKEDIN_URL },
-    { title: "CODEWARS", href: process.env.NEXT_PUBLIC_CODEWARS_URL },
-    { title: "UDEMY", href: process.env.NEXT_PUBLIC_UDEMY_URL },
+    { title: "GITHUB", href: process.env.NEXT_PUBLIC_GITHUB_URL as string },
+    { title: "LINKEDIN", href: process.env.NEXT_PUBLIC_LINKEDIN_URL as string },
+    { title: "CODEWARS", href: process.env.NEXT_PUBLIC_CODEWARS_URL as string },
+    { title: "UDEMY", href: process.env.NEXT_PUBLIC_UDEMY_URL as string },
   ],
   right: [{ title: "©2025", href: "/" }],
 };
