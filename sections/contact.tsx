@@ -11,6 +11,7 @@ import { FaPhoneVolume, FaProjectDiagram, FaUser } from "react-icons/fa";
 import { FaPen } from "react-icons/fa6";
 import { MdEmail, MdSubject } from "react-icons/md";
 import { SiMinutemailer } from "react-icons/si";
+import { z } from "zod";
 
 interface ContactFormData {
   name: string;
@@ -23,6 +24,15 @@ interface ContactFormData {
 
 interface SelectOption {
   text: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  subject?: string;
+  services?: string;
+  budget?: string;
+  message?: string;
 }
 
 const SERVICES_OPTIONS: SelectOption[] = [
@@ -42,10 +52,21 @@ const BUDGET_OPTIONS: SelectOption[] = [
   { text: "> $5000" },
 ];
 
+// Define the validation schema
+const contactFormSchema = z.object({
+  name: z.string().min(2, "Name is too short (min 2 characters)").nonempty("Name is required"),
+  email: z.string().email("Invalid email address").min(1, "Email is required"),
+  subject: z.string().min(3, "Subject is too short (min 3 characters)").nonempty("Subject is required"),
+  // services: z.array(z.string()).min(1, "Please select at least one service"),
+  // budget: z.array(z.string()).min(1, "Please select a budget range"),
+  message: z.string().min(5, "Message too short (min 2 characters)").nonempty("Message is required"),
+});
+
 export default function ContactSection() {
   const formRef = useRef<HTMLFormElement>(null!);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
+  const [errors, setErrors] = useState<FormErrors>({});
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
@@ -62,6 +83,8 @@ export default function ContactSection() {
   const handleEmailSubmission = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     try {
+      const validatedData = contactFormSchema.parse(formData);
+
       const response = await emailjs.sendForm(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
@@ -69,8 +92,28 @@ export default function ContactSection() {
         process.env.NEXT_PUBLIC_EMAILJS_USER_ID!,
       );
       console.log("Email sent successfully", response.text);
-    } catch (error: any) {
-      console.error("Failed to send email: ", error.text);
+
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        services: [],
+        budget: [],
+        message: "",
+      });
+      setErrors({});
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const newErrors: FormErrors = {};
+        error.errors.forEach((err) => {
+          const field = err.path[0].toString();
+          newErrors[field as keyof FormErrors] = err.message;
+        });
+        setErrors(newErrors);
+      } else {
+        setErrors({ message: "Something went wrong. Please try again later." });
+        console.error("Failed to send email:\n", error);
+      }
     }
   };
 
@@ -105,14 +148,16 @@ export default function ContactSection() {
                 placeholder="Full Name"
                 icon={<FaUser />}
                 value={formData.name}
+                error={errors.name}
                 onChange={(e) => handleFormChange("name", e.target.value)}
               />
               <Input
-                type="email"
                 name="email"
+                type="text"
                 placeholder="Email Address"
                 icon={<MdEmail />}
                 value={formData.email}
+                error={errors.email}
                 onChange={(e) => handleFormChange("email", e.target.value)}
               />
             </div>
@@ -123,6 +168,7 @@ export default function ContactSection() {
               placeholder="Subject"
               icon={<MdSubject />}
               value={formData.subject}
+              error={errors.subject}
               onChange={(e) => handleFormChange("subject", e.target.value)}
             />
 
@@ -163,7 +209,15 @@ export default function ContactSection() {
             {/*  </div>*/}
             {/*</div>*/}
 
-            <TextArea name="message" rows={5} placeholder="Share your concept with me." icon={<FaProjectDiagram />} />
+            <TextArea
+              name="message"
+              rows={5}
+              placeholder="Share your concept with me."
+              icon={<FaProjectDiagram />}
+              value={formData.message}
+              error={errors.message}
+              onChange={(e) => handleFormChange("message", e.target.value)}
+            />
 
             <div className="w-full flex justify-end">
               <div onClick={() => submitButtonRef.current?.click()}>

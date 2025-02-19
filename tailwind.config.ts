@@ -40,9 +40,14 @@ const config: Config = {
         grain: "url(/assets/images/background/noisy-background.png)",
       },
       animation: {
+        fadeIn: "fadeIn 1s ease-in-out",
         "noisy-bg": "noise 1s steps(2) infinite",
       },
       keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0", transform: "translateY(-10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
         noise: {
           "0%": {
             transform: "translate3d(0, 9rem, 0)",
