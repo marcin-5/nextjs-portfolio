@@ -1,4 +1,3 @@
-import "jquery.ripples";
 import $ from "jquery";
 import {
   forwardRef,
@@ -9,9 +8,10 @@ import {
   type RefObject,
   useCallback,
   useEffect,
-  useMemo,
-  useRef
+  useLayoutEffect,
+  useRef,
 } from "react";
+import "jquery.ripples";
 
 interface RipplesOptions {
   imageUrl?: string;
@@ -27,7 +27,7 @@ const DEFAULT_VALUES = {
   PERTURBANCE: 0.03,
   RESOLUTION: 256,
   INTERACTIVE: true,
-  CROSS_ORIGIN: undefined as RipplesOptions["crossOrigin"],
+  CROSS_ORIGIN: undefined as string | undefined,
   IMAGE_URL: undefined as string | undefined,
 } as const;
 
@@ -79,40 +79,38 @@ export const useRipples = (options: RipplesOptions & { rippleRef: RefObject<HTML
     interactive = DEFAULT_VALUES.INTERACTIVE,
     imageUrl = DEFAULT_VALUES.IMAGE_URL,
     resolution = DEFAULT_VALUES.RESOLUTION,
-    crossOrigin = DEFAULT_VALUES.CROSS_ORIGIN,
+    crossOrigin = DEFAULT_VALUES.CROSS_ORIGIN as RipplesOptions["crossOrigin"],
   } = options;
 
-  // Only re-initialize when init-only options change
-  const initOptions = useMemo(() => ({ resolution, crossOrigin }), [resolution, crossOrigin]);
-
   const jqueryElementRef = useRef<JQuery<HTMLDivElement> | null>(null);
+
+  // Use a ref to get the latest props in the initialization effect without it being a dependency.
+  const latestProps = useRef({ dropRadius, perturbance, interactive, imageUrl });
+  useLayoutEffect(() => {
+    latestProps.current = { dropRadius, perturbance, interactive, imageUrl };
+  });
 
   // Initialize on mount and when init-only options change
   useEffect(() => {
     if (!rippleRef.current) return;
-
     // Pass full initial options at init time
     jqueryElementRef.current = initializeRipples(rippleRef, {
       resolution,
       crossOrigin,
-      dropRadius,
-      perturbance,
-      interactive,
-      imageUrl,
+      ...latestProps.current,
     });
 
     return () => {
       jqueryElementRef.current?.ripples("destroy");
       jqueryElementRef.current = null;
     };
-    // Depend on memoized initOptions only to avoid churn
-  }, [rippleRef, initOptions, dropRadius, perturbance, interactive, imageUrl]);
+    // Re-run this effect only when init-only options change
+  }, [rippleRef, resolution, crossOrigin]);
 
   // Apply dynamic option changes without re-init
   useEffect(() => {
     const $el = jqueryElementRef.current;
     if (!$el) return;
-
     $el.ripples("set", "dropRadius", dropRadius);
     $el.ripples("set", "perturbance", perturbance);
     $el.ripples("set", "interactive", interactive);
@@ -162,20 +160,13 @@ const WaterEffect = forwardRef<HTMLDivElement, WaterEffectProps>(function WaterE
   const internalRef = useRef<HTMLDivElement>(null);
   const combinedRef = useCombinedRefs(internalRef, forwardedRef);
 
-  const { imageUrl, dropRadius, perturbance, resolution, interactive, crossOrigin, ...otherProps } = props;
-
   const rippleActions = useRipples({
     rippleRef: internalRef,
-    imageUrl,
-    dropRadius,
-    perturbance,
-    resolution,
-    interactive,
-    crossOrigin,
+    ...props,
   });
 
   return (
-    <div ref={combinedRef} {...otherProps}>
+    <div ref={combinedRef} {...props}>
       {children(rippleActions)}
     </div>
   );
