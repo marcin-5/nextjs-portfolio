@@ -5,7 +5,7 @@ export interface Project {
   stack: string[];
 }
 
-const projectData: Project[] = [
+export const projectData: Project[] = [
   {
     title: "Portfolio",
     link: "#",
