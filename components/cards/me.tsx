@@ -1,6 +1,6 @@
 import Card from "@/components/ui/card";
 import { mergeClassNames } from "@/lib/utils";
-import MyImg from "@/public/assets/images/gallery/me1.jpg";
+import MyImg from "@/public/assets/images/gallery/me0.jpg";
 import Image from "next/image";
 
 export default function MeCard() {
@@ -14,7 +14,7 @@ export default function MeCard() {
           className="absolute top-0 left-0 bottom-0 right-0 h-full w-full object-cover"
         />
         {/* Tags */}
-        <div className="absolute top-[75%] space-y-2">
+        <div className="absolute top-[25%] space-y-2">
           <TagComponent text="Hello, universe 👋" />
           <TagComponent text="I'm Marcin Bojara" className={"rounded-tl-none"} />
           <TagComponent text="Full stack developer" />
