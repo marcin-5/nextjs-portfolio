@@ -31,13 +31,13 @@ const SkillAndProjectCards = () => (
       </div>
       {/* lg+ (>= 2 cols): show first half in left column */}
       <div className="hidden lg:block">
-        <CoursesCard part="first" />
+        <CoursesCard part="first" ratio={0.45} />
       </div>
     </div>
     <div className="space-y-4">
       {/* lg+ (>= 2 cols): show second half in right column */}
       <div className="hidden lg:block">
-        <CoursesCard part="second" />
+        <CoursesCard part="second" ratio={0.45} />
       </div>
       <ExperienceCard />
       <EducationCard />

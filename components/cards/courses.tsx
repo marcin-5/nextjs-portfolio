@@ -236,8 +236,11 @@ const COURSES_DATA = [
   },
 ];
 
-export default function CoursesCard({ part = "both" }: { part?: "all" | "first" | "second" | "both" }) {
-  const mid = Math.ceil(COURSES_DATA.length / 2);
+export default function CoursesCard({ part = "both", ratio = 0.5 }: { part?: "all" | "first" | "second" | "both"; ratio?: number }) {
+  // Support ratio in [0,1] or as percentage [0,100]; default 0.5 (50/50)
+  const r = Number.isFinite(ratio) ? (ratio > 1 ? ratio / 100 : ratio) : 0.5;
+  const normalizedRatio = Math.min(1, Math.max(0, r));
+  const mid = Math.ceil(COURSES_DATA.length * normalizedRatio);
   const firstHalf = COURSES_DATA.slice(0, mid);
   const secondHalf = COURSES_DATA.slice(mid);
 
