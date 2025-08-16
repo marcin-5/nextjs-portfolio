@@ -15,13 +15,13 @@ export default function AboutSection() {
     <section id="about" className={"pt-24 px-3 lg:px-8"}>
       <Heading number="02" title_1="About" title_2="Me" />
       <div className={"space-y-4 py-8"}>
-        <div className={"space-y-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 2xl:grid-cols-3"}>
+        <div className={"space-y-4 lg:grid lg:grid-cols-2 lg:gap-4 lg:space-y-0 2xl:grid-cols-3"}>
           <MeCard />
           <ResumeCard />
           <BackgroundCard />
           <div className="2xl:hidden">{<Gallery />}</div>
         </div>
-        <div className={"space-y-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 2xl:grid-cols-3"}>
+        <div className={"space-y-4 lg:grid lg:grid-cols-2 lg:gap-4 lg:space-y-0 2xl:grid-cols-3"}>
           <div className={"space-y-4"}>
             <CoursesCard />
           </div>
