@@ -1,3 +1,4 @@
+import { Project } from "@/data/project";
 import Link from "next/link";
 import { FC, ReactNode } from "react";
 
@@ -9,12 +10,7 @@ export const ProjectList: FC<ProjectListProps> = ({ children }) => {
   return <div className="flex flex-col gap-y-6">{children}</div>;
 };
 
-interface ProjectListItemProps {
-  title: string;
-  link: string;
-  desc: string;
-  stack: string[];
-}
+interface ProjectListItemProps extends Project {}
 
 export const ProjectListItem: FC<ProjectListItemProps> = ({ title, link, desc, stack }) => {
   return (

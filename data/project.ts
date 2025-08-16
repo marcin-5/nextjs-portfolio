@@ -1,9 +1,22 @@
-export const projectData = [
+export interface Project {
+  title: string;
+  link: string;
+  desc: string;
+  stack: string[];
+}
+
+const projectData: Project[] = [
   {
     title: "Portfolio",
-    link: "",
+    link: "#",
     desc: "This page.",
     stack: ["Next.js", "TailwindCSS", "TypeScript"],
+  },
+  {
+    title: "Snake game",
+    link: "https://svelte-wasm-snake-game.vercel.app/",
+    desc: "This project implements a simple snake game using Rust, Svelte, and TypeScript. ",
+    stack: ["Rust", "Svelte", "TypeScript", "WebAssembly"],
   },
   {
     title: "Cinemate",
@@ -14,9 +27,7 @@ export const projectData = [
   {
     title: "Applications await deployment.",
     link: "https://github.com/marcin-5",
-    desc: "",
-    stack: ["Source code available on GitHub."],
+    desc: "Source code available on GitHub.",
+    stack: [],
   },
 ];
-
-export default projectData;
