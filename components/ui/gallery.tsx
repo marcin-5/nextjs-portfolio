@@ -19,12 +19,12 @@ interface GalleryImageProps {
 }
 
 const GalleryImage: React.FC<GalleryImageProps> = ({ imgSrc }) => (
-  <Image src={imgSrc} alt="" className="object-cover w-full h-full object-left-top" />
+  <Image src={imgSrc} alt="" className="object-cover w-full h-full object-center" />
 );
 
 export default function Gallery() {
   return (
-    <section id="gallery" className="h-[550px] sm:h-[650px] md:h-full 2xl:h-[750px] w-full">
+    <section id="gallery" className="h-[580px] sm:h-[720px] xl:h-full 2xl:h-[840px] w-full">
       <Swiper {...SWIPER_OPTIONS} className="mySwiper rounded-2xl">
         {galleryImages.map((img) => (
           <SwiperSlide key={img.id}>
