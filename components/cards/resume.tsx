@@ -47,10 +47,12 @@ export default function ResumeCard() {
       </div>
       <div className={"flex items-center justify-between md:absolute md:bottom-6 md:left-6 md:w-[calc(100%-48px)]"}>
         <Socials />
-        <Button>
-          <FaDownload />
-          Resume
-        </Button>
+        <span title="not available yet" aria-disabled="true">
+          <Button className="pointer-events-none opacity-50 cursor-not-allowed">
+            <FaDownload />
+            Resume
+          </Button>
+        </span>
       </div>
     </Card>
   );
