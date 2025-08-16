@@ -23,11 +23,22 @@ const MainInfoCards = () => (
 const SkillAndProjectCards = () => (
   <>
     <div className="space-y-4">
-      <CoursesCard />
+      {/* Projects first in all layouts */}
+      <ProjectsCard />
+      {/* Mobile/1-col: show all courses in one card */}
+      <div className="lg:hidden">
+        <CoursesCard part="all" />
+      </div>
+      {/* lg+ (>= 2 cols): show first half in left column */}
+      <div className="hidden lg:block">
+        <CoursesCard part="first" />
+      </div>
     </div>
     <div className="space-y-4">
-      <StackCard />
-      <ProjectsCard />
+      {/* lg+ (>= 2 cols): show second half in right column */}
+      <div className="hidden lg:block">
+        <CoursesCard part="second" />
+      </div>
       <ExperienceCard />
       <EducationCard />
     </div>
@@ -41,13 +52,15 @@ export default function AboutSection() {
       <div className="space-y-4 py-8">
         <div className={GRID_CLASSES}>
           <MainInfoCards />
-          <div className="2xl:hidden">
+          <div className="2xl:hidden space-y-4">
+            <StackCard />
             <Gallery />
           </div>
         </div>
         <div className={GRID_CLASSES}>
           <SkillAndProjectCards />
-          <div className="hidden 2xl:flex">
+          <div className="hidden 2xl:block space-y-4">
+            <StackCard />
             <Gallery />
           </div>
         </div>

@@ -236,14 +236,64 @@ const COURSES_DATA = [
   },
 ];
 
-export default function CoursesCard() {
+export default function CoursesCard({ part = "both" }: { part?: "all" | "first" | "second" | "both" }) {
+  const mid = Math.ceil(COURSES_DATA.length / 2);
+  const firstHalf = COURSES_DATA.slice(0, mid);
+  const secondHalf = COURSES_DATA.slice(mid);
+
+  if (part === "all") {
+    return (
+      <Card title="Completed Courses" sectionId={"courses"}>
+        <Timeline>
+          {COURSES_DATA.map((course, index) => (
+            <TimelineItem key={index} {...course} />
+          ))}
+        </Timeline>
+      </Card>
+    );
+  }
+
+  if (part === "first") {
+    return (
+      <Card title="Completed Courses" sectionId={"courses"}>
+        <Timeline>
+          {firstHalf.map((course, index) => (
+            <TimelineItem key={index} {...course} />
+          ))}
+        </Timeline>
+      </Card>
+    );
+  }
+
+  if (part === "second") {
+    return (
+      <Card title="Completed Courses (cont.)" sectionId={"courses-2"}>
+        <Timeline>
+          {secondHalf.map((course, index) => (
+            <TimelineItem key={index + mid} {...course} />
+          ))}
+        </Timeline>
+      </Card>
+    );
+  }
+
+  // part === "both" (default)
   return (
-    <Card title="Completed Courses" sectionId={"courses"}>
-      <Timeline>
-        {COURSES_DATA.map((course, index) => (
-          <TimelineItem key={index} {...course} />
-        ))}
-      </Timeline>
-    </Card>
+    <>
+      <Card title="Completed Courses" sectionId={"courses"}>
+        <Timeline>
+          {firstHalf.map((course, index) => (
+            <TimelineItem key={index} {...course} />
+          ))}
+        </Timeline>
+      </Card>
+      <Card title="Completed Courses (cont.)" sectionId={"courses-2"}>
+        <Timeline>
+          {secondHalf.map((course, index) => (
+            <TimelineItem key={index + mid} {...course} />
+          ))}
+        </Timeline>
+      </Card>
+    </>
   );
 }
