@@ -47,7 +47,7 @@ export default function LandingSection() {
       {renderSlogan()}
 
       {/* ScrollDown with responsive bottom offset and safe area consideration */}
-      <MagneticWrapper className="absolute left-1/2 -translate-x-1/2 bottom-[max(1.5rem,env(safe-area-inset-bottom))] sm:bottom-10 z-20">
+      <MagneticWrapper className="absolute left-1/2 -translate-x-1/2 bottom-[max(3.5rem,env(safe-area-inset-bottom))] sm:bottom-10 z-20">
         <ScrollDown />
       </MagneticWrapper>
     </section>
