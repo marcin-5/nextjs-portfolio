@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function MeCard() {
   return (
     <Card className="2xl:h-full" sectionId={"me"}>
-      <div className="w-full h-[400px] sm:h-[500px] overflow-hidden">
+      <div className="relative w-full h-[400px] sm:h-[500px] overflow-hidden">
         {/* background image */}
         <Image
           src={MyImg}
@@ -14,7 +14,7 @@ export default function MeCard() {
           className="absolute top-0 left-0 bottom-0 right-0 h-full w-full object-cover"
         />
         {/* Tags */}
-        <div className="absolute top-[25%] space-y-2">
+        <div className="absolute left-4 top-4 sm:top-[25%] space-y-2">
           <TagComponent text="Hello, universe 👋" />
           <TagComponent text="I'm Marcin Bojara" className={"rounded-tl-none"} />
           <TagComponent text="Full stack developer" />
