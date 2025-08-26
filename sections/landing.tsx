@@ -5,18 +5,24 @@ import MagneticWrapper from "@/components/visualEffects/magnetic-wrapper";
 
 export default function LandingSection() {
   const renderSlogan = () => (
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-8 leading-[14vw] lg:leading-[11vw] 2xl:leading-[9rem] font-medium h-[40rem]">
-      <div className="flex flex-col justify-center items-center text-primary-foreground text-[15vw] lg:text-[12vw] 2xl:text-[9rem] uppercase tracking-[-0.3rem]">
-        <div>
-          <span>Logic</span>
-        </div>
-        <div>
-          <span>Craft</span>
-        </div>
-        <div className="relative">
-          <span>Humanity</span>
-          <div className="text-[1rem] leading-[1.4rem] tracking-normal absolute top-[20vw] lg:top-[16vw] 2xl:top-[14rem] left-1/2 -translate-x-1/2 text-center w-[30rem] uppercase font-normal">
-            <span>Engineering solutions that perform — and matter.</span>
+    <div className="absolute inset-0 z-10 grid place-items-center px-4">
+      <div
+        className="flex flex-col items-center text-primary-foreground uppercase font-medium text-center"
+        /* Cap growth across devices */
+        /* Main heading size: min 2.5rem, preferred 12vw, max 8rem */
+      >
+        <div className="leading-tight tracking-[-0.02em] text-[clamp(2.5rem,12vw,8rem)]">
+          <div>
+            <span>Logic</span>
+          </div>
+          <div>
+            <span>Craft</span>
+          </div>
+          <div className="relative">
+            <span>Humanity</span>
+            <div className="mt-4 max-w-[32rem] text-center mx-auto normal-case font-normal text-[clamp(0.875rem,2.4vw,1.125rem)] leading-[1.4] tracking-normal">
+              <span>Engineering solutions that perform — and matter.</span>
+            </div>
           </div>
         </div>
       </div>
@@ -24,16 +30,24 @@ export default function LandingSection() {
   );
 
   return (
-    <section id="" className={"relative h-screen overflow-visible p-8"}>
+    <section
+      id=""
+      className={
+        // Use small viewport height unit and safe-area padding, avoid overflow-visible
+        "relative min-h-[100svh] overflow-hidden px-4 sm:px-8 pb-[max(2rem,env(safe-area-inset-bottom))]"
+      }
+    >
       <Header />
 
-      <div className={"absolute right-10 bottom-10"}>
+      {/* Clock in a safe area, layer above background */}
+      <div className="absolute right-4 bottom-4 sm:right-10 sm:bottom-10 z-20">
         <LiveClock timeZone={"Europe/Warsaw"} />
       </div>
 
       {renderSlogan()}
 
-      <MagneticWrapper className="absolute left-1/2 -translate-x-1/2 bottom-[5rem] md:bottom-10 ">
+      {/* ScrollDown with responsive bottom offset and safe area consideration */}
+      <MagneticWrapper className="absolute left-1/2 -translate-x-1/2 bottom-[max(1.5rem,env(safe-area-inset-bottom))] sm:bottom-10 z-20">
         <ScrollDown />
       </MagneticWrapper>
     </section>

@@ -49,7 +49,7 @@ export default function Header() {
   const showToggle = useScrollVisibility(SCROLL_THRESHOLD);
 
   return (
-    <header className="w-full flex items-center justify-center md:justify-between">
+    <header className="mt-5 w-full flex items-center justify-center md:justify-between">
       <Profile />
       <div className="hidden md:inline">
         <MagneticWrapper>
