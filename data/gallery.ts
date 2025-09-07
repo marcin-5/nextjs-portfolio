@@ -2,6 +2,7 @@ import Img0 from "@/public/assets/images/gallery/me0.jpg";
 import Img1 from "@/public/assets/images/gallery/me1.jpg";
 import Img2 from "@/public/assets/images/gallery/me2.jpg";
 import Img3 from "@/public/assets/images/gallery/me3.jpg";
+import Img4 from "@/public/assets/images/gallery/me4.png";
 
 const galleryImages = [
   {
@@ -19,6 +20,10 @@ const galleryImages = [
   {
     id: 3,
     img: Img3,
+  },
+  {
+    id: 4,
+    img: Img4,
   },
 ];
 
