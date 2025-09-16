@@ -25,6 +25,12 @@ export const projectData: Project[] = [
     stack: ["Nuxt.js", "TailwindCSS", "TypeScript"],
   },
   {
+    title: "TV show adviser",
+    link: "https://react-tv-show-adviser.netlify.app//",
+    desc: "This app providing TV Shows information.",
+    stack: ["React.js", "JavaScript", "Bootstrap"],
+  },
+  {
     title: "Applications await deployment.",
     link: "https://github.com/marcin-5",
     desc: "Source code available on GitHub.",
