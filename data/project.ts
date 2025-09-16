@@ -26,9 +26,15 @@ export const projectData: Project[] = [
   },
   {
     title: "TV show adviser",
-    link: "https://react-tv-show-adviser.netlify.app//",
+    link: "https://react-tv-show-adviser.netlify.app/",
     desc: "This app providing TV Shows information.",
     stack: ["React.js", "JavaScript", "Bootstrap"],
+  },
+  {
+    title: "Blogs portal",
+    link: "https://github.com/marcin-5/laravel-vue-blog",
+    desc: "Under construction.",
+    stack: ["Laravel", "Vue.js", "Inertia.js", "TailwindCSS"],
   },
   {
     title: "Applications await deployment.",
