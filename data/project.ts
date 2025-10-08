@@ -13,6 +13,12 @@ export const projectData: Project[] = [
     stack: ["Next.js", "TailwindCSS", "TypeScript"],
   },
   {
+    title: "Blogs portal",
+    link: "https://osobliwy.blog",
+    desc: "Under construction.",
+    stack: ["Laravel", "Vue.js", "Inertia.js", "TailwindCSS"],
+  },
+  {
     title: "Snake game",
     link: "https://svelte-wasm-snake-game.vercel.app/",
     desc: "This project implements a simple snake game using Rust, Svelte, and TypeScript. ",
@@ -29,12 +35,6 @@ export const projectData: Project[] = [
     link: "https://react-tv-show-adviser.netlify.app/",
     desc: "This app providing TV Shows information.",
     stack: ["React.js", "JavaScript", "Bootstrap"],
-  },
-  {
-    title: "Blogs portal",
-    link: "https://osobliwy.blog",
-    desc: "Under construction.",
-    stack: ["Laravel", "Vue.js", "Inertia.js", "TailwindCSS"],
   },
   {
     title: "Applications await deployment.",
