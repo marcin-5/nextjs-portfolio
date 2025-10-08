@@ -32,7 +32,7 @@ export const projectData: Project[] = [
   },
   {
     title: "Blogs portal",
-    link: "https://github.com/marcin-5/laravel-vue-blog",
+    link: "https://osobliwy.blog",
     desc: "Under construction.",
     stack: ["Laravel", "Vue.js", "Inertia.js", "TailwindCSS"],
   },
