@@ -229,14 +229,20 @@ const COURSES_DATA = [
   },
   {
     date: "2023.06.11",
-    title: "Python Developerr",
+    title: "Python Developer",
     subTitle: "Coders Lab",
     link: "https://www.linkedin.com/in/marcin-bojara-142857e/details/certifications/1635548818681",
     tag: "coderslab.pl",
   },
 ];
 
-export default function CoursesCard({ part = "both", ratio = 0.5 }: { part?: "all" | "first" | "second" | "both"; ratio?: number }) {
+export default function CoursesCard({
+  part = "both",
+  ratio = 0.5,
+}: {
+  part?: "all" | "first" | "second" | "both";
+  ratio?: number;
+}) {
   // Support ratio in [0,1] or as percentage [0,100]; default 0.5 (50/50)
   const r = Number.isFinite(ratio) ? (ratio > 1 ? ratio / 100 : ratio) : 0.5;
   const normalizedRatio = Math.min(1, Math.max(0, r));
