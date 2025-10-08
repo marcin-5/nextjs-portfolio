@@ -4,6 +4,13 @@ import { Timeline, TimelineItem } from "../ui/timeline";
 
 const COURSES_DATA = [
   {
+    date: "2025.08.31",
+    title: "Rust: The Complete Developer's Guide",
+    subTitle: "Stephen Grider",
+    link: "https://www.udemy.com/certificate/UC-552121c0-148d-42cb-b767-f1a8a95b5426/",
+    tag: "udemy.com",
+  },
+  {
     date: "2025.07.24",
     title: "Building web APIs with Rust (advanced)",
     subTitle: "Paris Liakos",
