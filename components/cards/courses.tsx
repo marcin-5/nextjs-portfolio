@@ -4,6 +4,13 @@ import { Timeline, TimelineItem } from "../ui/timeline";
 
 const COURSES_DATA = [
   {
+    date: "2025.10.15",
+    title: "Complete WordPress Developer Course - Plugins & Themes",
+    subTitle: "Luis Ramirez Jr",
+    link: "https://www.udemy.com/certificate/UC-d735b476-5668-400c-999c-70d908157f2a/",
+    tag: "udemy.com",
+  },
+  {
     date: "2025.08.31",
     title: "Rust: The Complete Developer's Guide",
     subTitle: "Stephen Grider",
