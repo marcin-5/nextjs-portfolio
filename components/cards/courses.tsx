@@ -4,6 +4,13 @@ import { Timeline, TimelineItem } from "../ui/timeline";
 
 const COURSES_DATA = [
   {
+    date: "2025.11.20",
+    title: "Laravel 12 & React: Build a Social Media App with Inertia ",
+    subTitle: "Piotr Jura",
+    link: "https://www.udemy.com/certificate/UC-7d1ba6f4-e270-4daf-b21b-cffde8daad9e/",
+    tag: "udemy.com",
+  },
+  {
     date: "2025.10.15",
     title: "Complete WordPress Developer Course - Plugins & Themes",
     subTitle: "Luis Ramirez Jr",
