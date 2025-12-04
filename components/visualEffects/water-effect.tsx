@@ -9,7 +9,7 @@ import {
   useCallback,
   useEffect,
   useLayoutEffect,
-  useRef,
+  useRef
 } from "react";
 import "jquery.ripples";
 
@@ -154,7 +154,7 @@ function useCombinedRefs<T>(...refs: (Ref<T> | undefined)[]): RefCallback<T> {
 }
 
 const WaterEffect = forwardRef<HTMLDivElement, WaterEffectProps>(function WaterEffect(
-  { children, ...props },
+  { children, imageUrl, dropRadius, perturbance, resolution, interactive, crossOrigin, ...divProps },
   forwardedRef,
 ) {
   const internalRef = useRef<HTMLDivElement>(null);
@@ -162,11 +162,16 @@ const WaterEffect = forwardRef<HTMLDivElement, WaterEffectProps>(function WaterE
 
   const rippleActions = useRipples({
     rippleRef: internalRef,
-    ...props,
+    imageUrl,
+    dropRadius,
+    perturbance,
+    resolution,
+    interactive,
+    crossOrigin,
   });
 
   return (
-    <div ref={combinedRef} {...props}>
+    <div ref={combinedRef} {...divProps}>
       {children(rippleActions)}
     </div>
   );
