@@ -37,7 +37,7 @@ const Tooltip: FC<TooltipProps> = ({ title, image, bgColor = null }) => {
       aria-label={title}
     >
       <div className="w-[32px] h-[32px]">
-        <Image src={image} alt={title} className="w-full h-full overflow-clip object-contain" />
+        <Image src={image} alt={title} width={32} height={32} className="w-full h-full overflow-clip object-contain" />
       </div>
       {renderTooltip()}
     </div>
