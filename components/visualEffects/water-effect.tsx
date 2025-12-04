@@ -9,7 +9,7 @@ import {
   useCallback,
   useEffect,
   useLayoutEffect,
-  useRef
+  useRef,
 } from "react";
 import "jquery.ripples";
 
