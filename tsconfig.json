@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -22,30 +18,12 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     },
-    "typeRoots": [
-      "./node_modules/@types",
-      "./@types"
-    ],
-    "types": [
-      "react",
-      "react-dom",
-      "node"
-    ],
-    "target": "ES2017"
+    "typeRoots": ["./node_modules/@types", "./@types"],
+    "types": ["react", "react-dom", "node"],
+    "target": "ES6"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "@types/*.ts",
-    ".next/dev/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "@types/*.ts", ".next/dev/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }
