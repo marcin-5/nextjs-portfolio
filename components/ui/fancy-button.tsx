@@ -3,11 +3,12 @@ import { FC, ReactNode } from "react";
 interface ButtonProps {
   text: string;
   icon: ReactNode;
+  onClick?: () => void;
 }
 
-const FancyButton: FC<ButtonProps> = ({ text, icon }) => {
+const FancyButton: FC<ButtonProps> = ({ text, icon, onClick }) => {
   return (
-    <a href="#contact" className={"fancy-btn"}>
+    <button className={"fancy-btn"} onClick={onClick}>
       <div
         className={
           "bg-black hover:bg-transparent text-primary-foreground hover:text-black " +
@@ -18,7 +19,7 @@ const FancyButton: FC<ButtonProps> = ({ text, icon }) => {
         <span>{text}</span>
         <span className={"group-hover:translate-x-[.75vw] transition-transform duration-100"}>{icon}</span>
       </div>
-    </a>
+    </button>
   );
 };
 

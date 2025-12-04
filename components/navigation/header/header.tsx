@@ -49,11 +49,18 @@ export default function Header() {
   const showToggle = useScrollVisibility(SCROLL_THRESHOLD);
 
   return (
-    <header className="mt-5 w-full flex items-center justify-center md:justify-between">
+    <header className="relative z-20 mt-5 w-full flex items-center justify-center md:justify-between">
       <Profile />
       <div className="hidden md:inline">
         <MagneticWrapper>
-          <FancyButton text="Let's talk" icon={<FaArrowRight />} />
+          <FancyButton
+            text="Let's talk"
+            icon={<FaArrowRight />}
+            onClick={() => {
+              const el = document.getElementById("contact");
+              el?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+          />
         </MagneticWrapper>
       </div>
       {showToggle && <MenuSection isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} />}

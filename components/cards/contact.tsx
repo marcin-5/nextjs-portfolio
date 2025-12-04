@@ -10,11 +10,10 @@ interface ContactCardProps {
 
 const ContactCard: FC<ContactCardProps> = ({ icon, btnText, text, title }) => {
   return (
-    <div
-      className="bg-secondary-background border border-border rounded-lg
-     relative overflow-hidden py-5 pl-[25px] shadow-md"
-    >
-      <div className={`z-20 flex flex-col items-start gap-4 sm:gap-6 md:gap-8 justify-start md:justify-between ${text ? "" : "my-6 md:my-9"}`}>
+    <div className="bg-secondary-background border border-border rounded-lg relative overflow-hidden py-5 pl-[25px] shadow-md">
+      <div
+        className={`z-20 flex flex-col items-start gap-4 sm:gap-6 md:gap-8 justify-start md:justify-between ${text ? "" : "my-6 md:my-9"}`}
+      >
         {/*Header*/}
         <div className="flex items-center gap-x-2">
           <span className="bg-white  w-8 h-8 rounded-lg grid place-items-center">{icon}</span>
